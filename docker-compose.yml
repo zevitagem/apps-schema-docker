@@ -12,7 +12,7 @@ services:
         ports:
             - "8080:80"
         networks:
-            - phpmyadmin-network
+            - josephcr-network
         volumes:
             - type: bind
               source: ./src
@@ -26,7 +26,8 @@ services:
         ports:
             - "3306:3306"
         networks:
-            - phpmyadmin-network
+            - josephcr-network
+            - database-network
     phpmyadmin:
         container_name: phpmyadmin
         image: phpmyadmin
@@ -39,8 +40,9 @@ services:
         depends_on:
             - mysql
         networks:
-            - phpmyadmin-network
+            - database-network
 volumes:
     src:
 networks:
-  phpmyadmin-network:
+  josephcr-network:
+  database-network:
