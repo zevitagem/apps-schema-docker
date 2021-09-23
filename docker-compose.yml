@@ -1,0 +1,48 @@
+version: '3.8'
+services:
+    php:
+        container_name: php
+        build:
+            context: ./
+            dockerfile: images/php/Dockerfile
+        depends_on:
+            - mysql
+        links:
+            - mysql
+        ports:
+            - "8080:80"
+        networks:
+            - josephcr-network
+        volumes:
+            - type: bind
+              source: ./src
+              target: /var/www/html
+    mysql:
+        container_name: mysql
+        image: mysql
+        restart: always
+        environment:
+            MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+        ports:
+            - "3306:3306"
+        networks:
+            - josephcr-network
+            - database-network
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin
+        ports:
+            - "3305:80"
+        restart: always
+        environment:
+            PMA_HOST: mysql
+            PMA_PASSWORD: ""
+        depends_on:
+            - mysql
+        networks:
+            - database-network
+volumes:
+    src:
+networks:
+  josephcr-network:
+  database-network:
