@@ -1,6 +1,6 @@
-# docker-rose (simple app with docker files test)
+# docker-rose (simple app with docker files)
 
-Existem duas maneiras de configurar seu ambiente, com ou sem o DOCKER-COMPOSE.YML (gerenciador de containeres).
+Existem duas maneiras de configurar seu ambiente, com ou sem o DOCKER-COMPOSE.YML (gerenciador de contêineres).
 
 #### 1º CASO - Utilizando DOCKER-COMPOSE.YML
 
@@ -45,14 +45,14 @@ Creating php        ... done
 
 Vá até a raiz do projeto e a partir de lá, siga os passos:
 
-> Criação das imagens com base no Dockerfile localizadoss em "images/*":
+> Criação das imagens com base nos arquivos "Dockerfile" localizados em "images/<local>":
 <pre>
 $ docker build -t php-image -f images/php/Dockerfile .
 $ docker build -t phpmyadmin-image -f images/phpmyadmin/Dockerfile .
 $ docker build -t mysql-image -f images/mysql/Dockerfile .
 </pre>
 
-> Criação das redes para comunicação entre os containeres:
+> Criação das redes para comunicação entre os contêineres:
 <pre>
 $ docker network create --driver=bridge database-network
 $ docker network create --driver=bridge joseph-network
@@ -63,7 +63,7 @@ $ docker network create --driver=bridge joseph-network
 $ docker run -d --name mysql mysql-image
 </pre>
 
-> Adicionar redes especifícas no MYSQL SERVER:
+> Adicionar redes específicas ao MYSQL SERVER:
 <pre>
 $ docker network connect joseph-network mysql
 $ docker network connect database-network mysql
@@ -85,4 +85,5 @@ $ docker run -d --name php -p 8080:80 \
 php-image
 </pre>
 
+Fim.
 ----
