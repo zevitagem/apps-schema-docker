@@ -14,6 +14,7 @@ services:
         networks:
             - josephcr-network
         volumes:
+            - ./config/apache/default.conf:/etc/apache2/sites-enabled/default.conf
             - type: bind
               source: ./src
               target: /var/www/html
