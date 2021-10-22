@@ -19,6 +19,7 @@ services:
               source: ./src
               target: /var/www/html
     mysql:
+        platform: linux/x86_64
         container_name: mysql
         image: mysql
         restart: always
@@ -29,6 +30,8 @@ services:
         networks:
             - josephcr-network
             - database-network
+        volumes:
+            - ./storage/mysql:/var/lib/mysql
     phpmyadmin:
         container_name: phpmyadmin
         image: phpmyadmin
