@@ -20,6 +20,9 @@ RUN apt-get install -y \
 RUN apt-get install -y \
         libzip-dev \
         zip
+RUN apt-get install -y \
+        nodejs \
+        npm
 
 #extensions
 RUN docker-php-ext-install pdo pdo_mysql
