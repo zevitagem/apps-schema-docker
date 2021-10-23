@@ -84,6 +84,40 @@ $ docker run -d --name php -p 8080:80 \
 	--mount src="$(pwd)/src",target=/var/www/html,type=bind \
 php-image
 </pre>
+	
+----
+
+#### EXTRA
+
+Caso deseja fazer com que a pasta "src/app" torne-se um sub-módulo do Git, segue abaixo alguns comandos para auxiliá-lo.
+
+> Acesse a pasta "src", tente adicionar, visto que ao clonar esse projeto, o mesmo já possuirá sua própria URL REMOTA que com certeza será diferente de suas aplicações:
+<pre>
+$ git submodule add https://github.com/own/app_repository.git app
+</pre>
+
+> Caso a aplicação/pasta selecionada já esteja no histórico do Git, será exibida a seguinte mensagem:
+<pre>
+$ 'src/app' already exists in the index
+</pre>
+	
+> Se for exibido o erro acima, confirme com o seguinte comando abaixo o estado "staged" desse diretório:
+<pre>
+$ git ls-files --stage app 
+100644 e69de29bb2d1d6434b8b29ae775ad8c2e48c5391 0	app/.gitkeep
+</pre>
+
+> Antes de dar continuidade, deverá "limpar" do Git essas informações com o seguinte comando:
+<pre>
+$ git rm --cached app -r
+rm 'src/app/.gitkeep'
+</pre>
+
+> Por fim, execute novamente o primeiro comando da operação, para adicionar o sub-módulo:
+<pre>
+$ git submodule add https://github.com/own/app_repository.git app
+Cloning into '/Users/Server/docker-rose/src/app'...
+</pre>
 
 Fim.
 ----
