@@ -1,3 +1,5 @@
 nbproject
-/src/app/vendor
-/src/storage/mysql
+src/app/*
+!src/app/.gitkeep
+storage/mysql
+.DS_Store
