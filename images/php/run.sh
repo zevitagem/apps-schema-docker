@@ -3,20 +3,21 @@
 #else
 #    composer create-project laravel/laravel /var/www/html/$APPPATH;
 #fi
-#
-#fixed to test, I don't know why the above code doesn't work --'
-composer create-project laravel/laravel /var/www/html/$APPPATH;
-#
-#if [$HAS_AUTHENTICATION == true]; then
-composer require laravel/breeze --dev
-php artisan breeze:install
-npm install
-npm run dev
+
+#if [$HAS_AUTHENTICATION_TAIL == true]; then
+#    composer require laravel/breeze --dev
+#    php artisan breeze:install
 #fi
-#
-php artisan migrate
-chmod 777 /var/www/html/$APPPATH/storage -R;
-#
-#/var/www/html/$APPPATH/artisan migrate --force;
-#/var/www/html/$APPPATH/artisan db:seed --force;
-#cp /var/www/html/$APPPATH/.env.example /var/www/html/$APPPATH/.env;
+
+#if [$HAS_AUTHENTICATION_BOOTS == true]; then
+#    composer require laravel/ui
+#    php artisan ui bootstrap --auth
+#fi
+
+# npm install
+# npm run dev
+# php artisan vendor:publish --tag=public
+# php artisan migrate
+# php artisan db:seed --force;
+# chmod 777 /var/www/html/$APPPATH/storage -R;
+# cp /var/www/html/$APPPATH/.env.example /var/www/html/$APPPATH/.env
