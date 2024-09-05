@@ -8,6 +8,18 @@ docker-compose up --build
 
 Exemplo de acesso via navegador: http://localhost:8080/app
 
+### Habilitar portas personalizadas
+
+Para configurar um projeto em *`src/<projeto>`* numa porta específica, devemos incluir/alterar algumas informações nos seguintes arquivos:
+
+```
+apache-config-laravel.conf (substituir a pasta <laravel>)
+
+docker-compose.yml (adicionar exposição da porta e compartilhamento do apache-config-laravel.conf)
+
+ports.conf (adicionar a porta)
+```
+
 ## Guia rápido para projetos em Laravel
 
 1. **Configure sua aplicação:**
