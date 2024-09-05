@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev
 
 # Bloco para instalação de extensões PHP específicas para MySQL
-RUN docker-php-ext-install pdo pdo_mysql zip
+RUN docker-php-ext-install intl pdo pdo_mysql zip
 
 # Instala o Composer
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
@@ -25,13 +25,14 @@ RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
 COPY src/ /var/www/html/
 
 # Copia a configuração personalizada do Apache
-COPY apache-config.conf /etc/apache2/sites-available/000-default.conf
+COPY apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Define o diretório de trabalho
 WORKDIR /var/www/html
 
-# Expõe a porta 80
-EXPOSE 80
+RUN a2enmod rewrite
+
+RUN service apache2 restart
 
 # O comando padrão do Docker para iniciar o Apache
 CMD ["apache2-foreground"]

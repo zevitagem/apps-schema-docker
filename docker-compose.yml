@@ -11,9 +11,12 @@ services:
             - mysql
         ports:
             - "8080:80"
+            # - "8082:82"
         networks:
             - poc-network
         volumes:
+            # - ./apache-config-laravel.conf:/etc/apache2/sites-enabled/001-default.conf
+            - ./ports.conf:/etc/apache2/ports.conf
             - type: bind
               source: ./src
               target: /var/www/html
