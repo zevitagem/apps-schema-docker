@@ -22,7 +22,7 @@ docker-compose up --build
 
 	php artisan db:seed
 
-	chown -R www-data:www-data
+	chown -R www-data:www-data storage
 
-	chmod -R 775
+	chmod -R 775 storage
 	```
