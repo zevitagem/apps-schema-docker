@@ -6,6 +6,8 @@ Primeiro, construa e inicie o contêiner Docker com o comando:
 docker-compose up --build
 ```
 
+Exemplo de acesso via navegador: http://localhost:8080/app
+
 ## Guia rápido para projetos em Laravel
 
 1. **Configure sua aplicação:**
