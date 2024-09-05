@@ -12,9 +12,8 @@ services:
         ports:
             - "8080:80"
         networks:
-            - josephcr-network
+            - poc-network
         volumes:
-            - ./config/apache/default.conf:/etc/apache2/sites-enabled/default.conf
             - type: bind
               source: ./src
               target: /var/www/html
@@ -28,25 +27,25 @@ services:
         ports:
             - "3306:3306"
         networks:
-            - josephcr-network
-            - database-network
+            - poc-network
+            - poc-database-network
         volumes:
             - ./storage/mysql:/var/lib/mysql
-    phpmyadmin:
-        container_name: phpmyadmin
-        image: phpmyadmin
-        ports:
-            - "3305:80"
-        restart: always
-        environment:
-            PMA_HOST: mysql
-            PMA_PASSWORD: ""
-        depends_on:
-            - mysql
-        networks:
-            - database-network
+    # phpmyadmin:
+    #     container_name: phpmyadmin
+    #     image: phpmyadmin
+    #     ports:
+    #         - "3305:80"
+    #     restart: always
+    #     environment:
+    #         PMA_HOST: mysql
+    #         PMA_PASSWORD: ""
+    #     depends_on:
+    #         - mysql
+    #     networks:
+    #         - poc-database-network
 volumes:
     src:
 networks:
-  josephcr-network:
-  database-network:
+  poc-network:
+  poc-database-network:
