@@ -5,21 +5,43 @@ services:
         build:
             context: ./
             dockerfile: images/php/Dockerfile
+            args:
+                APP_PATH: php
         depends_on:
             - mysql
         links:
             - mysql
         ports:
             - "8080:80"
-            # - "8082:82"
         networks:
             - poc-network
         volumes:
-            # - ./apache-config-laravel.conf:/etc/apache2/sites-enabled/001-default.conf
-            - ./ports.conf:/etc/apache2/ports.conf
+            - ./apache-config-php.conf:/etc/apache2/sites-enabled/000-default.conf
+            - ./ports-php.conf:/etc/apache2/ports.conf
             - type: bind
-              source: ./src
-              target: /var/www/html
+              source: ./src/php
+              target: /var/www/html/php
+    php-custom:
+        container_name: php-custom
+        build:
+            context: ./
+            dockerfile: images/php/Dockerfile
+            args:
+                APP_PATH: php-custom
+        depends_on:
+            - mysql
+        links:
+            - mysql
+        ports:
+            - "8082:82"
+        networks:
+            - poc-network
+        volumes:
+            - ./apache-config-php-custom.conf:/etc/apache2/sites-enabled/000-default.conf
+            - ./ports-php-custom.conf:/etc/apache2/ports.conf
+            - type: bind
+              source: ./src/php-custom
+              target: /var/www/html/php-custom
     mysql:
         platform: linux/x86_64
         container_name: mysql
@@ -34,19 +56,19 @@ services:
             - poc-database-network
         volumes:
             - ./storage/mysql:/var/lib/mysql
-    # phpmyadmin:
-    #     container_name: phpmyadmin
-    #     image: phpmyadmin
-    #     ports:
-    #         - "3305:80"
-    #     restart: always
-    #     environment:
-    #         PMA_HOST: mysql
-    #         PMA_PASSWORD: ""
-    #     depends_on:
-    #         - mysql
-    #     networks:
-    #         - poc-database-network
+    phpmyadmin:
+        container_name: phpmyadmin
+        image: phpmyadmin
+        ports:
+            - "3305:80"
+        restart: always
+        environment:
+            PMA_HOST: mysql
+            PMA_PASSWORD: ""
+        depends_on:
+            - mysql
+        networks:
+            - poc-database-network
 volumes:
     src:
 networks:

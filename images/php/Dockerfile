@@ -21,11 +21,14 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 RUN curl -fsSL https://deb.nodesource.com/setup_18.x | bash - \
     && apt-get install -y nodejs
 
-# Copia o código da aplicação para o contêiner
-COPY src/ /var/www/html/
+# Recebe o nome do app (ex.: php, php-custom) via build arg
+ARG APP_PATH
+
+# Copia somente o código do app correspondente
+COPY src/${APP_PATH}/ /var/www/html/${APP_PATH}/
 
 # Copia a configuração personalizada do Apache
-COPY apache-config.conf /etc/apache2/sites-enabled/000-default.conf
+# COPY apache-config.conf /etc/apache2/sites-enabled/000-default.conf
 
 # Define o diretório de trabalho
 WORKDIR /var/www/html
