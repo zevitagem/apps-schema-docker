@@ -1,5 +1,5 @@
 nbproject
 storage/mysql
 src/*
-!src/app
+!src/example
 .DS_Store
