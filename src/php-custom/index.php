@@ -1,6 +1,6 @@
 <?php
 
-echo 'Hello World! PHP Example' . PHP_EOL;
+echo 'Hello World! CUSTOM' . PHP_EOL;
 
 try {
     $pdo = new \PDO('mysql:host=mysql;port=3306', 'root', '');

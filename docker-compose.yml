@@ -69,8 +69,6 @@ services:
             - mysql
         networks:
             - poc-database-network
-volumes:
-    src:
 networks:
   poc-network:
   poc-database-network:

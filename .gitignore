@@ -1,5 +1,6 @@
 nbproject
 storage/mysql
 src/*
-!src/example
+!src/php
+!src/php-custom
 .DS_Store
